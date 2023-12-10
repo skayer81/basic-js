@@ -20,8 +20,8 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 class VigenereCipheringMachine {
-  constructor(revers){
-    this.revers = revers
+  constructor(notRevers = true){// = true){
+    this.notRevers = notRevers;
     this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   }
  // encrypt method accepts 2 parameters: message (string to encode) and key (string-keyword).
@@ -49,6 +49,7 @@ class VigenereCipheringMachine {
       // if (message[i].in)
       // let char = chars[]
   }
+  if (!this.notRevers) result = result.split('').reverse().join('');
   return result
   //console.log('m:', message, 'key:',key, 'result:',result)
   //throw new NotImplementedError('Not implemented');
@@ -58,9 +59,29 @@ class VigenereCipheringMachine {
  // decrypt method accepts 2 parameters: encryptedMessage (string to decode) and key (string-keyword).
   decrypt(encryptedMessage, key) {
     if (!encryptedMessage || !key) throw new Error('Incorrect arguments!')
-   // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let message = encryptedMessage.toUpperCase();
+    key = key.toUpperCase().repeat(Math.trunc(message.length/key.length + 1)).slice(0, message.length);
+    let result = '';
+    let count = 0;
+    for (let i = 0; i < message.length; i++){
+        let curentChar = message[i]
+        let index = this.chars.indexOf(curentChar);
+        if (index < 0) result += curentChar;
+        else{
+            index = index - this.chars.indexOf(key[count]) + this.chars.length;
+           // console.log(index, index %  this.chars.length)
+            index = index %  this.chars.length;
+         //   console.log(index, this.chars[index],  message.indexOf(key[count]))
+            result += this.chars[index];
+            count++
+        }
+        // if (message[i].in)
+        // let char = chars[]
+    }
+    if (!this.notRevers) result = result.split('').reverse().join('');
+    return result
   }
+  
 }
 
 module.exports = {
