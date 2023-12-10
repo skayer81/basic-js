@@ -19,7 +19,7 @@ function repeater(str, options) {
   let result = String(str);
   let additionSeparator = '|';
   let separator = '+'
-  let addition = '';
+  let addition = options.addition?options.addition:'';
   if (options.additionRepeatTimes){
       addition =  Array(options.additionRepeatTimes)
       .fill(String(options.addition))
@@ -30,6 +30,7 @@ function repeater(str, options) {
       .fill(str+addition)
       .join(options.separator?options.separator:separator)
   }
+  else result = str+addition;
   return result
 }
 
