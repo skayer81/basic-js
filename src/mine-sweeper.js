@@ -23,9 +23,33 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
+function findMine(rowOfCurentCell, colOfCurentCell, matrix){
+  let count = 0
+  for (let i = rowOfCurentCell - 1; i <= rowOfCurentCell + 1; i++) {
+    for (let j = colOfCurentCell -1; j <= colOfCurentCell + 1; j++) {
+      if ((i >= 0 && i < matrix.length) && (j >= 0 && j<  matrix[i].length && !(i === rowOfCurentCell && j === colOfCurentCell))){
+        if (matrix[i][j]) count++
+      }
+    }
+  }
+  return count;
+}
+
+
+
+
+
 function minesweeper( matrix ) {
   
- // let result = [];
+  //let result = Array(matrix.length).map((elem, i) => Array(matrix.length).fill(i) )// fill(0) //[];
+  let result=  Array(matrix.length).fill(Array(matrix[0].length).fill(0)).map(el => el.map(el2 => 0));
+  for (let i = 0; i <= result.length - 1; i++) 
+    for (let j = 0; j <= result[i].length - 1; j++) {
+        
+        result[i][j] = findMine(i, j, matrix);
+    }
+    console.debug(result)
+    return result
 
 //   for (let i = rowOfCurentCell - 1; i <= rowOfCurentCell + 1; i++) {
 //     for (let j = colOfCurentCell -1; j <= colOfCurentCell + 1; j++) {
@@ -49,9 +73,15 @@ function minesweeper( matrix ) {
   //   return count;
   // }
 
-  throw new NotImplementedError('Not implemented');}
+  //throw new NotImplementedError('Not implemented');
+}
   // remove line with error and write your code here
-
+   matrix = [
+    [true, false, false],
+    [false, true, false],
+    [false, false, false]
+  ]
+  minesweeper( matrix ) 
 
 module.exports = {
   minesweeper
