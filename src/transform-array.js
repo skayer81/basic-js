@@ -21,10 +21,16 @@ function transform( arr ) {
     switch (curentElem){
       //case Number(arr[i]): result.push(arr[i]);
       //break;
-        case '--discard-next': break;
-        case '--discard-prev': result.pop(); break;
-        case '--double-next': result.push(arr[i+1]); break;
-        case '--double-prev': result.push(arr[i-1]); break;
+        case '--discard-next': i++; break;
+        case '--discard-prev': {
+          //result.pop();
+          result.pop();
+          break;
+        }
+        case '--double-next': { if (i<arr.length - 1)
+          result.push(arr[i+1]); 
+          break;}
+        case '--double-prev': if (i>0) result.push(result[result.length-1]); break;
         case undefined:  break;
         default: result.push(curentElem)
 //       --discard-nextисключает следующий элемент массива из преобразованного массива.
@@ -34,6 +40,9 @@ function transform( arr ) {
      }
   //  if (Number(arr[i])) 
   }
+  // if(arr.length < 10) {
+  // console.debug('вошло:',arr)
+  // console.debug('вышло:', result)}
   return result
 
   //throw new NotImplementedError('Not implemented');
