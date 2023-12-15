@@ -23,6 +23,7 @@ function transform( arr ) {
       //break;
         case '--discard-next': i++; break;
         case '--discard-prev': {
+          if (arr[i-1] === result[result.length-1])
           //result.pop();
           result.pop();
           break;
@@ -30,7 +31,7 @@ function transform( arr ) {
         case '--double-next': { if (i<arr.length - 1)
           result.push(arr[i+1]); 
           break;}
-        case '--double-prev': if (i>0) result.push(result[result.length-1]); break;
+        case '--double-prev': if (i>0 && arr[i-1] === result[result.length-1]) result.push(result[result.length-1]); break;
         case undefined:  break;
         default: result.push(curentElem)
 //       --discard-nextисключает следующий элемент массива из преобразованного массива.
@@ -52,3 +53,27 @@ function transform( arr ) {
 module.exports = {
   transform
 };
+
+const cases = {
+  doubleDiscarded: {
+      input: [1, 2, 3, '--discard-next', 1337, '--double-prev', 4, 5],
+      output: [1, 2, 3, 4, 5]
+  },
+  doubleDoubled: {
+      input: [1, 2, 3, '--double-next', 1337, '--double-prev', 4, 5],
+      output: [1, 2, 3, 1337, 1337, 1337, 4, 5]
+  },
+  discardDiscarded: {
+      input: [1, 2, 3, '--discard-next', 1337, '--discard-prev', 4, 5],
+      output: [1, 2, 3, 4, 5]
+  },
+  discardDoubled: {
+      input: [1, 2, 3, '--double-next', 1337, '--discard-prev', 4, 5],
+      output: [1, 2, 3, 1337, 4, 5]
+  }
+};
+
+Object.values(cases).forEach(currCase => {
+  const { input, output } = currCase;
+  console.debug(transform(input), output);
+});
