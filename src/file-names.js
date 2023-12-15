@@ -16,7 +16,13 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles( names ) {
-  throw new NotImplementedError('Not implemented');
+  for (let i = 0; i <=  names.length - 1; i++){
+    let count = names.filter((elem, index) => (elem === names[i] && index < i)).length;
+    console.log(count, names[i])
+    if (count) names[i] = `${names[i]}(${count})`;// ( ${names.filter((elem, index) => (elem === names[i] && index < i)).length})` // names.filter((elem, index) => (elem === names[i] && index < i))
+  }
+  return names;
+  //throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
 
 // For input ["file", "file", "image", "file(1)", "file"],
@@ -36,6 +42,7 @@ function renameFiles( names ) {
 
 }
 
+console.log(renameFiles(['doc', 'doc', 'image', 'doc(1)', 'doc'])) //['doc', 'doc(1)', 'image', 'doc(1)(1)', 'doc(2)']
 module.exports = {
   renameFiles
 };
