@@ -48,7 +48,7 @@ function minesweeper( matrix ) {
         
         result[i][j] = findMine(i, j, matrix);
     }
-    console.debug(result)
+//console.debug(result)
     return result
 
 //   for (let i = rowOfCurentCell - 1; i <= rowOfCurentCell + 1; i++) {
@@ -76,12 +76,7 @@ function minesweeper( matrix ) {
   //throw new NotImplementedError('Not implemented');
 }
   // remove line with error and write your code here
-   matrix = [
-    [true, false, false],
-    [false, true, false],
-    [false, false, false]
-  ]
-  minesweeper( matrix ) 
+
 
 module.exports = {
   minesweeper
