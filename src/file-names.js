@@ -16,11 +16,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles( names ) {
-  for (let i = 0; i <=  names.length - 1; i++){
+  let f = false
+  for (let i = names.length - 1; i >= 0; i--){
     let count = names.filter((elem, index) => (elem === names[i] && index < i)).length;
-    console.log(count, names[i])
-    if (count) names[i] = `${names[i]}(${count})`;// ( ${names.filter((elem, index) => (elem === names[i] && index < i)).length})` // names.filter((elem, index) => (elem === names[i] && index < i))
+    //console.log(count, names[i])
+    if (count) {
+      f = true;
+      names[i] = `${names[i]}(${count})`
+    };// ( ${names.filter((elem, index) => (elem === names[i] && index < i)).length})` // names.filter((elem, index) => (elem === names[i] && index < i))
   }
+  // for (let i = names.length - 1; i >= 0; i--){
+  //   let count = names.filter((elem, index) => (elem === names[i] && index < i)).length;
+  //   console.log(count, names[i])
+  //   if (count) names[i] = `${names[i]}(${count})`;// ( ${names.filter((elem, index) => (elem === names[i] && index < i)).length})` // names.filter((elem, index) => (elem === names[i] && index < i))
+  // }
+  console.log(names)
+  if (f) renameFiles(names)
   return names;
   //throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
