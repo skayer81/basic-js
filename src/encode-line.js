@@ -27,7 +27,6 @@ function encodeLine( str ) {
   if (count > 1) result += count
   result += curentChar;
   return result
-
 }
 
 module.exports = {

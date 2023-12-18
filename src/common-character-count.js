@@ -17,10 +17,10 @@ function getCommonCharacterCount( s1, s2 ) {
   let index = 0;
   let count = 0;
   for (elem of a1){
-     if (a2.indexOf(elem, index) != -1){
-         count += 1;
-         index = a2.indexOf(elem)+1
-     }
+    if (a2.indexOf(elem, index) != -1){
+      count += 1;
+      index = a2.indexOf(elem)+1
+    }
   }
   return count;
 }

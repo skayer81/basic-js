@@ -26,7 +26,7 @@ function repeater(str, options) {
       .join(options.additionSeparator?options.additionSeparator:additionSeparator)
   }
   if (options.repeatTimes){
-       result = Array(options.repeatTimes)
+      result = Array(options.repeatTimes)
       .fill(str+addition)
       .join(options.separator?options.separator:separator)
   }

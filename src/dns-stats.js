@@ -32,24 +32,9 @@ function getDNSStats( domains ) {
         if (result[curentItem]) result[curentItem] += 1
         else result[curentItem] = 1
       }
-   //  let curentItem = arr[i].reduce((acc, elem, index) => index > j? acc : `${acc}.${elem}`, '' ) ;//.reduce((acc, elem, index) => {return асс + index}, 0 ) //> j? acc: acc)//  `.${elem}${acc}` , '')
-      //if (!) 
-    //  console.log(arr[i][j] ,curentItem)
     }
-
-  console.log(result)
   return result
- // throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
 }
-
-domains = [
-    'code.yandex.ru',
-    'music.yandex.ru',
-    'yandex.ru'
-   ]
-
-getDNSStats(domains)
 
 module.exports = {
   getDNSStats
